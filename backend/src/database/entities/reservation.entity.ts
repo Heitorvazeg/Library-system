@@ -2,9 +2,15 @@ import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGen
 import { Client } from "./client.entity";
 import { Book } from "./book.entity";
 
+// ReservationStatus to finish reservation
+export enum ReservationStatus {
+    ACTIVE = 'ACTIVE',
+    FINISHED = 'FINISHED'
+}
+
 @Entity('reservation')
 export class Reservation {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
@@ -12,6 +18,13 @@ export class Reservation {
 
     @Column()
     deliveryDate: Date;
+
+    @Column({
+        type: 'enum',
+        enum: ReservationStatus,
+        default: ReservationStatus.ACTIVE
+    })
+    status: ReservationStatus
 
     @ManyToOne(() => Client, client => client.reservations)
     @JoinColumn({name: 'clientId'})

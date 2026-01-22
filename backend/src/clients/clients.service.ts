@@ -3,14 +3,13 @@ import { Client } from 'src/database/entities/client.entity';
 import { CreateClientDTO } from './DTOs/create.client.dto';
 import { ClientsRepository } from './clients.repository';
 import { PatchClientDTO } from './DTOs/patch.client.dto';
-import { cp } from 'fs';
 
 @Injectable()
 export class ClientsService {
     constructor(private repo: ClientsRepository) {}
 
     async findClients(): Promise<Client[]> {
-        return this.repo.findAll();
+        return await this.repo.findAll();
     }
 
     async createClient(clientDto: CreateClientDTO): Promise<Client> {
@@ -21,7 +20,7 @@ export class ClientsService {
             throw new ConflictException('CPF já cadastrado')
         }
 
-        return this.repo.createClient(clientDto);
+        return await this.repo.createClient(clientDto);
     }
 
     async deleteClient(cpf: string): Promise<void> {
@@ -31,7 +30,7 @@ export class ClientsService {
             throw new NotFoundException('Cliente não foi encontrado');
         }
 
-        const deleted = this.repo.deleteClient(client.id);
+        const deleted = await this.repo.deleteClient(client.id);
 
         // Validate if client exists or not
         if (!deleted) {
@@ -46,6 +45,6 @@ export class ClientsService {
             throw new NotFoundException('Cliente não encontrado');
         }
 
-        return this.repo.modifyClient(clientPatchDto, client);
+        return await this.repo.modifyClient(clientPatchDto, client);
     }
 }

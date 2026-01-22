@@ -13,11 +13,11 @@ export class BooksRepository {
     ) {}
 
     async findBooks(): Promise<Book[]> {
-        return this.repo.find();
+        return await this.repo.find();
     }
 
     async findBooksByAvailableState(): Promise<Book[]> {
-        return this.repo.find({where: {available: true}});
+        return await this.repo.find({where: {available: true}});
     }
 
     async findBookByTitle(title: string): Promise<Book | null> {
@@ -25,13 +25,13 @@ export class BooksRepository {
     }
 
     async findBookById(id: number): Promise<Book | null> {
-        return this.repo.findOne({where: {id}});
+        return await this.repo.findOne({where: {id}});
     }
 
     async createBook(book: CreateBooksDTO): Promise<Book> {
-        const instaceBook = this.repo.create(book);
+        const instaceBook = await this.repo.create(book);
 
-        return this.repo.save(instaceBook);
+        return await this.repo.save(instaceBook);
     }
 
     async deleteBook(id: number): Promise<boolean> {
@@ -42,6 +42,6 @@ export class BooksRepository {
 
     async modifyBook(book: Book, bookData: Partial<PatchBooksDTO>): Promise<Book> {
         Object.assign(book, bookData);
-        return this.repo.save(book);
+        return await this.repo.save(book);
     }
 }

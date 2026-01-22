@@ -3,7 +3,7 @@ import { Reservation } from "./reservation.entity";
 
 @Entity('client')
 export class Client {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column()

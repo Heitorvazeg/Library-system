@@ -17,12 +17,12 @@ export class BooksController {
         return this.service.createBook(createBookDTO);
     }
 
-    @Delete('title/:title')
+    @Delete(':title')
     deleteBook(@Param('title') title: string) {
         return this.service.deleteBook(title);
     }
 
-    @Patch('/title/:title')
+    @Patch(':title')
     modifyBook(@Param('title') title: string, @Body() updateBook: PatchBooksDTO) {
         return this.service.modifyBook(title, updateBook);
     }

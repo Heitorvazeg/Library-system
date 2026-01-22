@@ -13,7 +13,7 @@ export class ClientsRepository {
     ) {}
 
     async findAll(): Promise<Client[]> {
-        return this.repo.find();
+        return await this.repo.find();
     }
 
     async findByCpf(cpf: string): Promise<Client | null> {
@@ -21,7 +21,7 @@ export class ClientsRepository {
     }
 
     async findById(id: number): Promise<Client | null> {
-        return this.repo.findOne({where: {id}});
+        return await this.repo.findOne({where: {id}});
     }
 
     async createClient(clientDto: CreateClientDTO): Promise<Client> {
@@ -31,7 +31,7 @@ export class ClientsRepository {
             email: clientDto.email
         })
 
-        return this.repo.save(clientEntity);
+        return await this.repo.save(clientEntity);
     }
 
     async deleteClient(id: number): Promise<boolean> {
@@ -43,6 +43,6 @@ export class ClientsRepository {
     async modifyClient(clientData: Partial<PatchClientDTO>, client: Client): Promise<Client> {
         Object.assign(client, clientData);
 
-        return this.repo.save(client);
+        return await this.repo.save(client);
     }
 }

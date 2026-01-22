@@ -5,14 +5,23 @@ import { ClientsService } from './clients.service';
 describe('ClientsController', () => {
   let controller: ClientsController;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [ClientsController],
-      providers: [ClientsService],
-    }).compile();
+beforeEach(async () => {
+  const module: TestingModule = await Test.createTestingModule({
+    controllers: [ClientsController],
+    providers: [
+      {
+        provide: ClientsService,
+        useValue: {
+          findClients: jest.fn(),
+          createClient: jest.fn(),
+        },
+      },
+    ],
+  }).compile();
 
-    controller = module.get<ClientsController>(ClientsController);
-  });
+  controller = module.get<ClientsController>(ClientsController);
+});
+
 
   it('should be defined', () => {
     expect(controller).toBeDefined();

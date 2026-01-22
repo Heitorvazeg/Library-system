@@ -2,8 +2,6 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ClientsService } from './clients.service';
 import { ClientsRepository } from './clients.repository';
 import { ConflictException, NotFoundException } from '@nestjs/common';
-import { PatchClientDTO } from './DTOs/patch.client.dto';
-import { ClientsController } from './clients.controller';
 
 describe('ClientsService', () => {
   let service: ClientsService;
@@ -19,7 +17,6 @@ describe('ClientsService', () => {
     };
 
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ClientsController],
       providers: [
         ClientsService,
         { provide: ClientsRepository, useValue: repo },
@@ -38,7 +35,9 @@ describe('ClientsService', () => {
     const clients = [{ id: 1, name: 'Heitor', cpf: '12345678901' }];
     repo.findAll.mockResolvedValue(clients);
 
-    await expect(service.findClients()).resolves.toEqual(clients);
+    const result = await service.findClients();
+
+    expect(result).toEqual(clients);
   });
 
   // createClient()
@@ -47,17 +46,16 @@ describe('ClientsService', () => {
     const newClient = { id: 1, name: 'Teste', cpf: '71312332111' };
     repo.createClient.mockResolvedValue(newClient);
 
-    await expect(
-      service.createClient({ name: 'Teste', cpf: '71312332111' } as any),
-    ).resolves.toEqual(newClient);
+    const result = await service.createClient({ name: 'Teste', cpf: '71312332111' } as any);
+
+    expect(result).toEqual(newClient);
   });
 
   it('should throw ConflictException if CPF already exists', async () => {
     repo.findByCpf.mockResolvedValue({ id: 1, cpf: '12345678901' });
 
-    await expect(
-      service.createClient({ cpf: '12345678901', name: 'teste' } as any),
-    ).rejects.toThrow(ConflictException);
+    expect(service.createClient({ cpf: '12345678901', name: 'teste' } as any))
+    .rejects.toThrow(ConflictException);
   });
 
   // deleteClient()
@@ -66,16 +64,16 @@ describe('ClientsService', () => {
     repo.findByCpf.mockResolvedValue(client);
     repo.deleteClient.mockResolvedValue(true);
 
-    await expect(service.deleteClient('12345678901')).resolves.toBeUndefined();
+    const result = await service.deleteClient('12345678901');
+
+    expect(result).toBeUndefined();
     expect(repo.deleteClient).toHaveBeenCalledWith(client.id);
   });
 
   it('should throw NotFoundException if CPF does not exist', async () => {
     repo.findByCpf.mockResolvedValue(null);
 
-    await expect(service.deleteClient('12345678901')).rejects.toThrow(
-      NotFoundException,
-    );
+    expect(service.deleteClient('12345678901' as any)).rejects.toThrow(NotFoundException);
   });
 
   // modifyClient()
@@ -87,9 +85,9 @@ describe('ClientsService', () => {
     repo.findByCpf.mockResolvedValue(client);
     repo.modifyClient.mockResolvedValue(updatedClient);
 
-    await expect(service.modifyClient('12345678901', patchDto)).resolves.toEqual(
-      updatedClient,
-    );
+    const result = await service.modifyClient('12345678901', patchDto);
+
+    expect(result).toEqual(updatedClient);
     expect(repo.modifyClient).toHaveBeenCalledWith(patchDto, client);
   });
 
@@ -97,8 +95,6 @@ describe('ClientsService', () => {
     repo.findByCpf.mockResolvedValue(null);
     const patchDto = { name: 'Novo Nome' };
 
-    await expect(service.modifyClient('12345678901', patchDto)).rejects.toThrow(
-      NotFoundException,
-    );
+    expect(service.modifyClient('12345678901', patchDto)).rejects.toThrow(NotFoundException);
   });
 });

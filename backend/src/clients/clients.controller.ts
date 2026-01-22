@@ -17,12 +17,12 @@ export class ClientsController {
         return this.service.createClient(createClientDTO);
     }
 
-    @Delete('cpf/:cpf')
+    @Delete(':cpf')
     deleteClient(@Param('cpf') cpf: string) {
         return this.service.deleteClient(cpf);
     }
 
-    @Patch('cpf/:cpf')
+    @Patch(':cpf')
     modifyClient(@Param('cpf') cpf: string, @Body() client: PatchClientDTO) {
         return this.service.modifyClient(cpf, client);
     }

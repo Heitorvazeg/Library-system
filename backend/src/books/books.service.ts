@@ -12,7 +12,7 @@ export class BooksService {
         if (!available) return this.repo.findBooks();
 
         // Returns available books
-        return this.repo.findBooksByAvailableState();
+        return await this.repo.findBooksByAvailableState();
     }
 
     async createBook(bookCreate: CreateBooksDTO): Promise<Book> {
@@ -23,7 +23,7 @@ export class BooksService {
             throw new ConflictException('Titulo já existe na biblioteca')
         }
 
-        return this.repo.createBook(bookCreate);
+        return await this.repo.createBook(bookCreate);
     }
 
     async deleteBook(title: string): Promise<boolean> {
@@ -33,7 +33,7 @@ export class BooksService {
             throw new NotFoundException('Título não existe na biblioteca');
         }
 
-        return this.repo.deleteBook(book.id);
+        return await this.repo.deleteBook(book.id);
     }
 
     async modifyBook(title: string, updatedBook: Partial<PatchBooksDTO>): Promise<Book> {
@@ -43,6 +43,6 @@ export class BooksService {
             throw new NotFoundException('Título não existe na biblioteca');
         }
 
-        return this.repo.modifyBook(book, updatedBook);
+        return await this.repo.modifyBook(book, updatedBook);
     }
 }
