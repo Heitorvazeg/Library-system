@@ -1,0 +1,25 @@
+<section>
+    <div class="headReservations">
+        <h1>Reservas</h1>
+    </div>
+
+    <div class="crudReservationsBtns">
+        <button id="createReservationsBtn">Fazer Reserva</button>
+        <button id="updateReservationsBtn">Atualizar Status de Reserva</button>
+    </div>
+    <div class="reservationsDiv">
+        <div class="filterReservations">
+            <input type="text" name="" id="">
+            <button id="filterReservationsBtn">Filtrar</button>
+        </div>
+        @if (loading) {
+            <p>Carregando...</p>
+        } @else if (errorMessage) {
+            <p class="error">{{ errorMessage }}</p>
+        } @else {
+            @for (reservation of reservations; track reservation.id) {
+                <app-reservation-card [reservation]="reservation" />
+            }
+        }
+    </div>
+</section>

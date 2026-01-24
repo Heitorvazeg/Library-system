@@ -1,0 +1,10 @@
+<div class="reservationCard">
+  <div class="info">
+    <h3>{{ reservation.book.title }}</h3>
+    <p class="author">Autor: {{ reservation.book.author }}</p>
+    <p class="client">Cliente: {{ reservation.client.name }} ({{ reservation.client.cpf }})</p>
+    <p class="dates">
+      Reservado em: {{ reservation.reservationDate }} |
+      Entrega em: {{ reservation.deliveryDate }}
+    </p>
+  </div>

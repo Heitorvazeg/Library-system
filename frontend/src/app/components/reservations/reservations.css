@@ -1,0 +1,117 @@
+section {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ===== TÍTULO ===== */
+.headReservations h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+/* ===== BOTÕES CRUD ===== */
+.crudReservationsBtns {
+  display: flex;
+  gap: 12px;
+}
+
+.crudReservationsBtns button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #2563eb;
+  color: #fff;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.crudReservationsBtns button:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+#updateReservationsBtn {
+  background-color: #10b981;
+}
+
+#updateReservationsBtn:hover {
+  background-color: #059669;
+}
+
+/* ===== ÁREA PRINCIPAL ===== */
+.reservationsDiv {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== FILTRO ===== */
+.filterReservations {
+  display: flex;
+  gap: 8px;
+}
+
+.filterReservations input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 0.9rem;
+}
+
+.filterReservations input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+#filterReservationsBtn {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background-color: #10b981;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+#filterReservationsBtn:hover {
+  background-color: #059669;
+}
+
+/* ===== ESTADOS ===== */
+p {
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* ===== LISTA DE RESERVAS ===== */
+app-reservation-card {
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 768px) {
+  .crudReservationsBtns {
+    flex-direction: column;
+  }
+
+  .filterReservations {
+    flex-direction: column;
+  }
+}

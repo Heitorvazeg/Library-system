@@ -1,0 +1,26 @@
+<section>
+    <div class="headBooks">
+        <h1>Livros</h1>
+    </div>
+
+    <div class="crudBookBtns">
+        <button id="createBookBtn">Cadastrar Livro</button>
+        <button id="deleteBookBtn">Deletar Livro</button>
+        <button id="updateBookBtn">Atualizar Livro</button>
+    </div>
+    <div class="bookDiv">
+        <div class="filterBooks">
+            <input type="text" name="" id="">
+            <button id="filterBooksBtn">Filtrar</button>
+        </div>
+        @if (loading) {
+            <p>Carregando...</p>
+        } @else if (errorMessage) {
+            <p class="error">{{ errorMessage }}</p>
+        } @else {
+            @for (book of books; track book.id) {
+                <app-book-card [book]="book" />
+            }
+        }
+    </div>
+</section>

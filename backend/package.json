@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "migration": "npx typeorm migration:run -d ./dist/database/typeorm.config.js",
+    "migration": "docker compose exec backend npx typeorm-ts-node-commonjs migration:run -d src/database/typeorm.config.ts",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

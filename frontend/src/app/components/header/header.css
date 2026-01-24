@@ -1,0 +1,86 @@
+.headerApp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 64px;
+  padding: 0 24px;
+
+  background-color: #1f2937;
+  color: #ffffff;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.headerApp .library {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.headerApp h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.headerApp .btns {
+  display: flex;
+  gap: 12px;
+}
+
+.headerApp button {
+  padding: 8px 16px;
+  background-color: transparent;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.headerApp button:hover {
+  background-color: #374151;
+}
+
+@media (max-width: 768px) {
+  .headerApp {
+    padding: 0 16px;
+  }
+
+  .headerApp h1 {
+    font-size: 1.1rem;
+  }
+
+  .headerApp button {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerApp {
+    height: auto;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .headerApp h1 {
+    display: none;
+  }
+
+  .headerApp .library {
+    width: 32px;
+    height: 32px;
+  }
+
+  .headerApp .btns {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  .headerApp button {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}

@@ -1,19 +1,13 @@
-# Build
-FROM node:20-alpine AS build
+FROM node:20-alpine
+
 WORKDIR /app
 
 COPY package*.json ./
+
 RUN npm install
 
 COPY . .
 
-RUN npm run test
+EXPOSE 3000
 
-RUN npm run build
-
-# Execute
-# Nginx because Angular does not server the static files in production
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-
-EXPOSE 80
+CMD ["npm", "run", "start"]

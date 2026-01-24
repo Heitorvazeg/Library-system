@@ -1,0 +1,26 @@
+<section>
+    <div class="headClients">
+        <h1>Clientes</h1>
+    </div>
+
+    <div class="crudClientBtns">
+        <button id="createClientBtn" (click)="onClick()">Cadastrar Cliente</button>
+        <button id="deleteClientBtn">Deletar Cliente</button>
+        <button id="updateClientBtn">Atualizar Cliente</button>
+    </div>
+    <div class="clientsDiv">
+        <div class="filterClients">
+            <input type="text" name="" id="">
+            <button id="filterClientsBtn">Filtrar</button>
+        </div>
+        @if (loading) {
+            <p>Carregando...</p>
+        } @else if (errorMessage) {
+            <p class="error">{{ errorMessage }}</p>
+        } @else {
+            @for (client of clients; track client.id) {
+                <app-client-card [client]="client" />
+            }
+        }
+    </div>
+</section>

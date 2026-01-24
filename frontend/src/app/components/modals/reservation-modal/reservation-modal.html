@@ -1,0 +1,44 @@
+<div class="reservationModal">
+  <div class="modalContent">
+    <h2>Reservar Livro</h2>
+
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div class="field">
+        <label for="cpf">CPF do Cliente</label>
+        <input
+          type="text"
+          id="cpf"
+          name="cpf"
+          [(ngModel)]="clientCpf"
+          maxlength="11"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <label for="book">Livro</label>
+        <input
+          type="text"
+          id="book"
+          name="book"
+          [(ngModel)]="bookTitle"
+          required
+          readonly
+        />
+      </div>
+
+        @if (loading) {
+        <p class="info">Carregando...</p>
+        } @else if (errorMessage) {
+        <p class="error">{{ errorMessage }}</p>
+        }
+
+      <div class="actions">
+        <button type="button" class="cancel" (click)="close()">Cancelar</button>
+        <button type="submit" class="confirm" [disabled]="form.invalid || loading" (submit)="onSubmit()">
+          Reservar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
