@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Delete, Patch, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Patch, Param, Query, ParseBoolPipe } from '@nestjs/common';
 import { CreateBooksDTO } from './DTOs/create.books.dto';
 import { BooksService } from './books.service';
 import { PatchBooksDTO } from './DTOs/patch.books.dto';
@@ -8,8 +8,9 @@ export class BooksController {
     constructor(private readonly service: BooksService) {}
 
     @Get()
-    getBooks(@Query('available') available?: boolean) {
-        return this.service.findBooks(available);
+    getBooks(@Query('available') available?: string | boolean) {
+        const isAvailable = String(available) === 'true';
+        return this.service.findBooks(isAvailable);
     }
 
     @Post()

@@ -4,17 +4,18 @@
     </div>
 
     <div class="crudReservationsBtns">
-        <button id="createReservationsBtn">Fazer Reserva</button>
-        <button id="updateReservationsBtn">Atualizar Status de Reserva</button>
+        <button id="createReservationsBtn" (click)="createReservation()">Fazer Reserva</button>
+        <button id="updateReservationsBtn" (click)="finishReservation()">Atualizar Status de Reserva</button>
     </div>
     <div class="reservationsDiv">
         <div class="filterReservations">
-            <input type="text" name="" id="">
-            <button id="filterReservationsBtn">Filtrar</button>
+            <div>
+                <label for="checkbox">Pendentes</label>
+                <input type="checkbox" name="" id="Pendentes" [(ngModel)]="pending" placeholder="Pendentes">
+            </div>
+            <button id="filterReservationsBtn" (click)="loadReservations()">Filtrar</button>
         </div>
-        @if (loading) {
-            <p>Carregando...</p>
-        } @else if (errorMessage) {
+        @if (errorMessage) {
             <p class="error">{{ errorMessage }}</p>
         } @else {
             @for (reservation of reservations; track reservation.id) {

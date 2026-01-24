@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('books')
@@ -11,6 +12,7 @@ export class Book {
     @Column()
     author: string;
 
+    @IsOptional()
     @Column({ default: true })
-    available: true;
+    available: boolean;
 }

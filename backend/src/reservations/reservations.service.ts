@@ -4,6 +4,7 @@ import { CreateReservationsDTO } from './DTOs/create.reservations.dto';
 import { Reservation, ReservationStatus } from '../database/entities/reservation.entity';
 import { BooksRepository } from '../books/books.repository';
 import { ClientsRepository } from '../clients/clients.repository';
+import { PatchBooksDTO } from 'src/books/DTOs/patch.books.dto';
 
 @Injectable()
 export class ReservationsService {
@@ -23,7 +24,7 @@ export class ReservationsService {
     }
 
     async createReservation(reservationDto: CreateReservationsDTO): Promise<Reservation> {
-        const book = await this.repoBook.findBookByTitle(reservationDto.bookTitule);
+        const book = await this.repoBook.findBookByTitle(reservationDto.bookTitle);
         if (!book) {
             throw new NotFoundException('Livro não existe');
         }
@@ -50,6 +51,11 @@ export class ReservationsService {
             book
         }
 
+        let newBook = {
+            available: false
+        }
+    
+        await this.repoBook.modifyBook(book, newBook);
         return await this.repo.createReservation(reservation);
     }
 
@@ -83,6 +89,11 @@ export class ReservationsService {
             fine = fixedFine + (daysLate * (dailyRate * fixedFine));
         }
 
+        let newBook = {
+            available: true
+        }
+    
+        await this.repoBook.modifyBook(book, newBook);
         await this.repo.modifyStatusOfReservation(reservation.id, ReservationStatus.FINISHED);
 
         return {

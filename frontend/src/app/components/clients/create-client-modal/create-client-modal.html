@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Cadastrar Novo Cliente</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="clientForm" class="form-container">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Nome Completo</mat-label>
+      <input matInput formControlName="name" placeholder="Ex: João Silva">
+      @if (clientForm.get('name')?.invalid && clientForm.get('name')?.touched) {
+        <mat-error>O nome é obrigatório.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CPF</mat-label>
+      <input matInput formControlName="cpf" placeholder="000.000.000-00">
+      @if (clientForm.get('cpf')?.invalid && clientForm.get('cpf')?.touched) {
+        <mat-error>CPF inválido.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" placeholder="email@exemplo.com">
+      @if (clientForm.get('email')?.invalid && clientForm.get('email')?.touched) {
+        <mat-error>Insira um e-mail válido.</mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" [disabled]="clientForm.invalid" (click)="onSave()">
+    Salvar Cliente
+  </button>
+</mat-dialog-actions>

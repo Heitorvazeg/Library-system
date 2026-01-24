@@ -8,4 +8,8 @@ export class PatchBooksDTO {
     @IsOptional()
     @IsNotEmpty()
     author?: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    available?: boolean;
 }

@@ -13,7 +13,7 @@ export interface Client {
   providedIn: 'root',
 })
 export class ClientsService {
-  private api = 'http://backend:3000/clients';
+  private api = 'http://localhost:3000/clients/';
 
   constructor(private http: HttpClient) {}
 
@@ -26,10 +26,10 @@ export class ClientsService {
   }
 
   uptadeClient(client: Partial<Client>, cpf: string) {
-    return this.http.patch(`${this.api}/${cpf}`, client);
+    return this.http.patch(`${this.api}${cpf}`, client);
   }
 
   deleteClient(cpf: string) {
-    return this.http.delete(`${this.api}/${cpf}`);
+    return this.http.delete(`${this.api}${cpf}`);
   }
 }

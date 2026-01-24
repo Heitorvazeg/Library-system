@@ -1,13 +1,3 @@
 <app-header></app-header>
 <router-outlet></router-outlet>
-@if (btnService.clickedReservation() == 'clicked') {
-  <app-reservation-modal></app-reservation-modal>
-}
-@if (btnService.clicked() == 'clients') {
-  <app-clients></app-clients>
-} @else if (btnService.clicked() == 'books') {
-  <app-books></app-books>
-} @else if (btnService.clicked() == 'reservations') {
-  <app-reservations></app-reservations>
-}
 <app-footer></app-footer>

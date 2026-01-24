@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ButtonsStateService } from '../../services/buttons-state/buttons-state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +9,19 @@ import { ButtonsStateService } from '../../services/buttons-state/buttons-state'
   styleUrl: './header.css',
 })
 export class Header {
-  constructor (private btnStateService: ButtonsStateService) {}
+  constructor (
+              private router: Router
+  ) {}
 
   onClickBooks() {
-    this.btnStateService.set('books');
+    this.router.navigate(['/books']);
   }
 
   onClickClients() {
-    this.btnStateService.set('clients');
+    this.router.navigate(['/clients']);
   }
 
   onClickReservations() {
-    this.btnStateService.set('reservations');
+    this.router.navigate(['/reservations']);
   }
 }

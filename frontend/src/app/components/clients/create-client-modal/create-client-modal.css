@@ -1,0 +1,42 @@
+/* Container que segura os inputs */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Diminuí um pouco para não ficar gigante */
+  min-width: 350px;
+  padding-top: 20px;
+}
+
+/* Força os campos a ocuparem a largura toda com bordas bonitas */
+mat-form-field {
+  width: 100%;
+}
+
+/* Título do Modal com cor de destaque */
+h2[mat-dialog-title] {
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  color: #333;
+}
+
+/* Área de botões no rodapé */
+mat-dialog-actions {
+  padding: 16px 24px !important;
+  border-top: 1px solid #e0e0e0;
+  margin-bottom: 0 !important;
+}
+
+/* Estilo para quando o formulário está enviando */
+button:disabled {
+  filter: grayscale(0.5);
+  cursor: not-allowed;
+}
+
+/* Responsividade para celulares */
+@media (max-width: 450px) {
+  .form-container {
+    min-width: 100%;
+  }
+}

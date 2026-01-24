@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+/* Estilo para erro (Vermelho) */
+.error-snackbar {
+  --mdc-snackbar-container-color: #f44336; /* Cor de fundo */
+  --mdc-snackbar-label-text-color: #ffffff; /* Cor do texto */
+}
+
+/* Estilo para o botão de ação dentro da snackbar */
+.error-snackbar .mat-mdc-snack-bar-action {
+  color: #ffffff !important;
+  font-weight: bold;
+}
+
+/* Exemplo para sucesso (Verde) */
+.success-snackbar {
+  --mdc-snackbar-container-color: #4caf50;
+  --mdc-snackbar-label-text-color: #ffffff;
+}

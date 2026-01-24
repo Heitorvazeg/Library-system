@@ -7,8 +7,9 @@ export class ReservationsController {
     constructor (private readonly service: ReservationsService) {}
 
     @Get()
-    listReservations(@Query('pending') pending: boolean) {
-        return this.service.listReservations(pending);
+    listReservations(@Query('pending') pending: string | boolean) {
+        const isPending = String(pending) === 'true';
+        return this.service.listReservations(isPending);
     }
 
     @Post()

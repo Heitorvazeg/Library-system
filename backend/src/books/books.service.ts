@@ -9,10 +9,10 @@ export class BooksService {
     constructor(private repo: BooksRepository) {}
 
     async findBooks(available?: boolean): Promise<Book[]> {
-        if (!available) return this.repo.findBooks();
+        if (available == undefined) return this.repo.findBooks();
 
         // Returns available books
-        return await this.repo.findBooksByAvailableState();
+        return await this.repo.findBooksByAvailableState(available);
     }
 
     async createBook(bookCreate: CreateBooksDTO): Promise<Book> {

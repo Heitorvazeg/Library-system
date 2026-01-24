@@ -4,18 +4,13 @@
     </div>
 
     <div class="crudClientBtns">
-        <button id="createClientBtn" (click)="onClick()">Cadastrar Cliente</button>
-        <button id="deleteClientBtn">Deletar Cliente</button>
-        <button id="updateClientBtn">Atualizar Cliente</button>
+        <button id="createClientBtn" (click)="openCreateClient()">Cadastrar Cliente</button>
+        <button id="deleteClientBtn" (click)="deleteClient()">Deletar Cliente</button>
+        <button id="updateClientBtn" (click)="updateClient()">Atualizar Cliente</button>
     </div>
     <div class="clientsDiv">
-        <div class="filterClients">
-            <input type="text" name="" id="">
-            <button id="filterClientsBtn">Filtrar</button>
-        </div>
-        @if (loading) {
-            <p>Carregando...</p>
-        } @else if (errorMessage) {
+        <button class="obterCli" (click)="loadClients">Obter clientes</button>
+        @if (errorMessage) {
             <p class="error">{{ errorMessage }}</p>
         } @else {
             @for (client of clients; track client.id) {

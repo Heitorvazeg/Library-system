@@ -4,18 +4,19 @@
     </div>
 
     <div class="crudBookBtns">
-        <button id="createBookBtn">Cadastrar Livro</button>
-        <button id="deleteBookBtn">Deletar Livro</button>
-        <button id="updateBookBtn">Atualizar Livro</button>
+        <button id="createBookBtn" (click)="openAddBookDialog()">Cadastrar Livro</button>
+        <button id="deleteBookBtn" (click)="deleteBook()">Deletar Livro</button>
+        <button id="updateBookBtn" (click)="updateBook()">Atualizar Livro</button>
     </div>
     <div class="bookDiv">
         <div class="filterBooks">
-            <input type="text" name="" id="">
-            <button id="filterBooksBtn">Filtrar</button>
+            <div>
+                <label for="checkbox">Disponível</label>
+                <input type="checkbox" name="" id="checkbox" [(ngModel)]="available" placeholder="Disponível">
+            </div>
+            <button id="filterBooksBtn" (click)="loadBooks()">Filtrar</button>
         </div>
-        @if (loading) {
-            <p>Carregando...</p>
-        } @else if (errorMessage) {
+        @if (errorMessage) {
             <p class="error">{{ errorMessage }}</p>
         } @else {
             @for (book of books; track book.id) {

@@ -16,8 +16,8 @@ export class BooksRepository {
         return await this.repo.find();
     }
 
-    async findBooksByAvailableState(): Promise<Book[]> {
-        return await this.repo.find({where: {available: true}});
+    async findBooksByAvailableState(available: boolean): Promise<Book[]> {
+        return await this.repo.find({where: {available: available}});
     }
 
     async findBookByTitle(title: string): Promise<Book | null> {

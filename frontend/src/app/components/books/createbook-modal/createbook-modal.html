@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Cadastrar Novo Livro</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="bookForm" class="form-container">
+    
+    <mat-form-field appearance="outline">
+      <mat-label>Título do Livro</mat-label>
+      <input matInput formControlName="title" placeholder="Ex: O Senhor dos Anéis">
+      @if (bookForm.get('title')?.invalid && bookForm.get('title')?.touched) {
+        <mat-error>O título é obrigatório.</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Autor</mat-label>
+      <input matInput formControlName="author" placeholder="Ex: J.R.R. Tolkien">
+      @if (bookForm.get('author')?.invalid && bookForm.get('author')?.touched) {
+        <mat-error>O nome do autor é obrigatório.</mat-error>
+      }
+    </mat-form-field>
+
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isSubmitting">Cancelar</button>
+  <button 
+    mat-raised-button 
+    color="primary" 
+    [disabled]="bookForm.invalid || isSubmitting" 
+    (click)="onSave()">
+    @if (isSubmitting) {
+      <span>Salvando...</span>
+    } @else {
+      <span>Salvar Livro</span>
+    }
+  </button>
+</mat-dialog-actions>

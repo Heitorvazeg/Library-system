@@ -8,11 +8,13 @@ export class ReservationsRepo {
     constructor(@InjectRepository(Reservation) private repo: Repository<Reservation>) {}
 
     async listReservations(): Promise<Reservation[]> {
-        return await this.repo.find();
+        return await this.repo.find({
+            relations: ['client', 'book'],
+        });
     }
 
     async listPendingReservations(): Promise<Reservation[]> {
-        return await this.repo.find({where: {deliveryDate: LessThan(new Date())}});
+        return await this.repo.find({where: {deliveryDate: LessThan(new Date())}, relations: ['client', 'book']});
     }
 
     async findReservationByBookId(bookId: number): Promise<Reservation | null> {

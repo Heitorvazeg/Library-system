@@ -58,7 +58,9 @@ section {
 /* ===== FILTRO ===== */
 .filterBooks {
   display: flex;
-  gap: 8px;
+  justify-content: left;
+  gap: 30px;
+  align-items: center;
 }
 
 .filterBooks input {

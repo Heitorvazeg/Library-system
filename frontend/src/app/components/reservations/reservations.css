@@ -58,7 +58,9 @@ section {
 /* ===== FILTRO ===== */
 .filterReservations {
   display: flex;
-  gap: 8px;
+  justify-content: left;
+  align-items: center;
+  gap: 20px;
 }
 
 .filterReservations input {

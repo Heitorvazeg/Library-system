@@ -13,7 +13,7 @@ export interface Book {
   providedIn: 'root',
 })
 export class BooksService {
-  private api = 'http://backend:3000/books';
+  private api = 'http://localhost:3000/books/';
 
   constructor (private http: HttpClient) {};
 
@@ -30,10 +30,10 @@ export class BooksService {
   }
 
   uptadeBook(book: Partial<Book>, title: string) {
-    return this.http.patch(`${this.api}/${title}`, book);
+    return this.http.patch(`${this.api}${title}`, book);
   }
 
   deleteBook(title: string) {
-    return this.http.delete(`${this.api}/${title}`);
+    return this.http.delete(`${this.api}${title}`);
   }
 }

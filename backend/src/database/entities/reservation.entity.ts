@@ -8,7 +8,7 @@ export enum ReservationStatus {
     FINISHED = 'FINISHED'
 }
 
-@Entity('reservation')
+@Entity('reservations')
 export class Reservation {
     @PrimaryGeneratedColumn()
     id: number;
@@ -20,11 +20,11 @@ export class Reservation {
     deliveryDate: Date;
 
     @Column({
-        type: 'enum',
+        type: "enum",
         enum: ReservationStatus,
         default: ReservationStatus.ACTIVE
     })
-    status: ReservationStatus
+    status: ReservationStatus;
 
     @ManyToOne(() => Client, client => client.reservations)
     @JoinColumn({name: 'clientId'})

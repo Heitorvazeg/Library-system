@@ -6,5 +6,5 @@ export class CreateReservationsDTO {
     clientCpf: string;
 
     @IsNotEmpty()
-    bookTitule: string;
+    bookTitle: string;
 }

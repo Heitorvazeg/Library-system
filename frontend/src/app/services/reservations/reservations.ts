@@ -10,6 +10,7 @@ export interface Reservation {
   client: Client;
   deliveryDate: Date;
   reservationDate: Date;
+  status: string;
 }
 
 @Injectable({
@@ -18,7 +19,7 @@ export interface Reservation {
 export class ReservationsService {
   constructor (private http: HttpClient) {}
 
-  private api = 'http://backend:3000/reservations';
+  private api = 'http://localhost:3000/reservations/';
 
   listReservations(pending: boolean): Observable<Reservation[]> {
     return this.http.get<Reservation[]>(this.api, {
@@ -33,6 +34,6 @@ export class ReservationsService {
   }
 
   uptadeReservation(reservation: Partial<Reservation>, title: string) {
-    return this.http.patch(`${this.api}/${title}`, reservation);
+    return this.http.patch(`${this.api}${title}`, reservation);
   }
 }
