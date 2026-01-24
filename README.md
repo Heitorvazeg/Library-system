@@ -17,7 +17,7 @@ O projeto é dividido em duas partes principais:
 
 ### Backend
 * **Node.js & NestJS**: Framework escalável para o lado do servidor.
-* **Banco de Dados**: [Inserir aqui: MongoDB ou MySQL] com uso de ORM para integridade dos dados.
+* **Banco de Dados**: MySQL com uso de ORM para integridade dos dados.
 * **Validações**: Class-validator para regras de negócio e integridade de CPF.
 
 ### Frontend
