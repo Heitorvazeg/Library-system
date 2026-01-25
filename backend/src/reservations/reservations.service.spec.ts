@@ -29,7 +29,9 @@ describe('ReservationsService', () => {
         },
         {
           provide: BooksRepository,
-          useValue: { findBookByTitle: jest.fn() },
+          useValue: { findBookByTitle: jest.fn(),
+            modifyBook: jest.fn()
+           },
         },
         {
           provide: ClientsRepository,
