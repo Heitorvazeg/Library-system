@@ -61,7 +61,7 @@ export class Clients implements OnInit {
     }
 
     if (cpf.length !== 11 || isNaN(Number(cpf))) {
-      this.snackBar.open('CPF Inválido! Digite apenas os 11 números.', 'Erro', { duration: 3000 });
+      this.snackBar.open('CPF Inválido! Digite apenas os 11 números.', 'Erro', { duration: 3000, panelClass: ['error-snackbar'] });
       return;
     }
 
@@ -71,11 +71,11 @@ export class Clients implements OnInit {
   private deleteC(cpf: string) {
     this.clientService.deleteClient(cpf).subscribe({
       next: () => {
-        this.snackBar.open(`Cliente ${cpf} excluído com sucesso!`, 'OK', { duration: 3000 });
+        this.snackBar.open(`Cliente ${cpf} excluído com sucesso!`, 'OK', { duration: 3000, panelClass: ['success-snackbar'] });
         this.loadClients();
       },
       error: (err) => {
-        this.snackBar.open('Erro ao comunicar com o servidor.', 'Fechar');
+        this.snackBar.open(err.message, 'Fechar', {duration: 3000, panelClass: ['error-snackbar']});
         console.error('Erro no delete:', err);
       }
     });
@@ -103,12 +103,12 @@ export class Clients implements OnInit {
 private executePatch(cpf: string, data: any) {
   this.clientService.uptadeClient(data, cpf).subscribe({
     next: () => {
-      this.snackBar.open("Cliente atualizado com sucesso", "OK", { duration: 3000 });
+      this.snackBar.open("Cliente atualizado com sucesso", "OK", { duration: 3000, panelClass: ['success-snackbar'] });
       this.loadClients();
     },
     error: (err: any) => {
       console.error(err);
-      this.snackBar.open("Atualização falhou", "Close");
+      this.snackBar.open(err.message, "Close", {duration: 3000, panelClass: ['error-snackbar']});
     }
   });
 }

@@ -36,7 +36,6 @@ export class CreateClientModalComponent {
     this.clientForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$|^\d{3}\.\d{3}\.\d{3}-\d{2}$/)]],
-      email: ['', [Validators.required, Validators.email]]
     });
   }
 

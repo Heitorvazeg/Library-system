@@ -29,7 +29,8 @@ export class ReservationsService {
             throw new NotFoundException('Livro não existe');
         }
 
-        const activeReservation = await this.repo.findReservationByBookId(book.id);
+        const activeReservation = await this.repo.findActiveReservationByBookId(book.id);
+
         if (activeReservation?.status == ReservationStatus.ACTIVE) {
             throw new ConflictException('Livro já está reservado');
         }
@@ -65,7 +66,7 @@ export class ReservationsService {
             throw new NotFoundException('Titulo não existe');
         }
 
-        const reservation = await this.repo.findReservationByBookId(book.id);
+        const reservation = await this.repo.findActiveReservationByBookId(book.id);
         if (!reservation) {
             throw new NotFoundException('Reserva não encontrada');
         }

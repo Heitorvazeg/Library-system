@@ -75,11 +75,16 @@ export class Books implements OnInit {
   private deleteC(title: string) {
     this.booksService.deleteBook(title).subscribe({
       next: () => {
-        this.snackBar.open(`Livro ${title} excluído com sucesso!`, 'OK', { duration: 3000 });
+        this.snackBar.open(`Livro ${title} excluído com sucesso!`, 'OK', { duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
         this.loadBooks();
       },
       error: (err) => {
-        this.snackBar.open('Erro ao comunicar com o servidor.', 'Fechar');
+        this.snackBar.open(err.message, 'Fechar', {
+          duration: 3000,
+          panelClass: ['error-snackbar'],
+        });
         console.error('Erro no delete:', err);
       }
     });
@@ -107,12 +112,15 @@ export class Books implements OnInit {
 private executeBookPatch(id: string, data: any) {
   this.booksService.uptadeBook(data, id).subscribe({
     next: () => {
-      this.snackBar.open("Livro atualizado com sucesso", "OK", { duration: 3000 });
+      this.snackBar.open("Livro atualizado com sucesso", "OK", { duration: 3000, panelClass: ['success-snackbar'] });
       this.loadBooks();
     },
     error: (err: any) => {
       console.error(err);
-      this.snackBar.open("Falha na atualização", "Fechar");
+      this.snackBar.open("Falha na atualização", "Fechar", {
+        duration: 3000,
+        panelClass: ['error-snackbar'],
+      });
     }
   });
 }

@@ -66,12 +66,12 @@ createReservation() {
 
     this.reservationService.createReservation(newReservation.clientCpf, newReservation.bookTitle).subscribe({
       next: () => {
-        this.snackBar.open(`Reserva criada com sucesso!`, 'OK', { duration: 3000 });
+        this.snackBar.open(`Reserva criada com sucesso!`, 'OK', { duration: 3000, panelClass: ['success-snackbar'] });
         this.loadReservations();
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Fechar', {
-          duration: 5000,
+          duration: 3000,
           panelClass: ['error-snackbar'],
         });
         console.error('Erro no delete:', err);
@@ -102,7 +102,7 @@ private executeFinish(id: string, data: any) {
     },
     error: (err: any) => {
       console.error(err);
-      this.snackBar.open(err.message, "Fechar", { duration: 3000 });
+      this.snackBar.open(err.message, "Fechar", { duration: 3000, panelClass: ['error-snackbar'] });
     }
   });
 }

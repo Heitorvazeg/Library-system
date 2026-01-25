@@ -22,7 +22,7 @@ describe('ReservationsService', () => {
           useValue: {
             listReservations: jest.fn(),
             listPendingReservations: jest.fn(),
-            findReservationByBookId: jest.fn(),
+            findActiveReservationByBookId: jest.fn(),
             createReservation: jest.fn(),
             modifyStatusOfReservation: jest.fn(),
           },
@@ -75,7 +75,7 @@ describe('ReservationsService', () => {
     const client = { id: 1 };
 
     booksRepo.findBookByTitle.mockResolvedValue(book);
-    reservationsRepo.findReservationByBookId.mockResolvedValue(null);
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue(null);
     clientsRepo.findByCpf.mockResolvedValue(client);
     reservationsRepo.createReservation.mockResolvedValue({ id: 1 });
 
@@ -98,7 +98,7 @@ describe('ReservationsService', () => {
 
   it('should throw ConflictException if book is already reserved', async () => {
     booksRepo.findBookByTitle.mockResolvedValue({ id: 1 });
-    reservationsRepo.findReservationByBookId.mockResolvedValue({
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue({
       status: ReservationStatus.ACTIVE,
     });
 
@@ -109,7 +109,7 @@ describe('ReservationsService', () => {
 
   it('should throw NotFoundException if client does not exist', async () => {
     booksRepo.findBookByTitle.mockResolvedValue({ id: 1 });
-    reservationsRepo.findReservationByBookId.mockResolvedValue(null);
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue(null);
     clientsRepo.findByCpf.mockResolvedValue(null);
 
     await expect(
@@ -127,7 +127,7 @@ describe('ReservationsService', () => {
     };
 
     booksRepo.findBookByTitle.mockResolvedValue(book);
-    reservationsRepo.findReservationByBookId.mockResolvedValue(reservation);
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue(reservation);
     reservationsRepo.modifyStatusOfReservation.mockResolvedValue(true);
 
     const result = await service.patchReservationStatus('Livro A');
@@ -145,7 +145,7 @@ describe('ReservationsService', () => {
     };
 
     booksRepo.findBookByTitle.mockResolvedValue(book);
-    reservationsRepo.findReservationByBookId.mockResolvedValue(reservation);
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue(reservation);
     reservationsRepo.modifyStatusOfReservation.mockResolvedValue(true);
 
     const result = await service.patchReservationStatus('Livro A');
@@ -156,7 +156,7 @@ describe('ReservationsService', () => {
 
   it('should throw ConflictException if reservation already finished', async () => {
     booksRepo.findBookByTitle.mockResolvedValue({ id: 1 });
-    reservationsRepo.findReservationByBookId.mockResolvedValue({
+    reservationsRepo.findActiveReservationByBookId.mockResolvedValue({
       status: ReservationStatus.FINISHED,
     });
 

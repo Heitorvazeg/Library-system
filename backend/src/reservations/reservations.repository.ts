@@ -17,10 +17,11 @@ export class ReservationsRepo {
         return await this.repo.find({where: {deliveryDate: LessThan(new Date())}, relations: ['client', 'book']});
     }
 
-    async findReservationByBookId(bookId: number): Promise<Reservation | null> {
+    async findActiveReservationByBookId(bookId: number): Promise<Reservation | null> {
         return await this.repo.findOne({
             where: {
-                book: {id: bookId}
+                book: {id: bookId},
+                status: ReservationStatus.ACTIVE,
             }
         })
     }
